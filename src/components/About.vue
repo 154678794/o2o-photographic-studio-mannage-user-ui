@@ -18,8 +18,8 @@
               mode="horizontal"
               @select="handleSelect"
             >
-              <el-menu-item index="1">自选套餐</el-menu-item>
-              <el-menu-item index="2">修图</el-menu-item>
+              <el-menu-item index="1" @click="toSelect">自选套餐</el-menu-item>
+              <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{data.username}}</template>
                 <el-menu-item index="2-1">我的信息</el-menu-item>
@@ -256,6 +256,9 @@ export default {
     //   });
     //   this.quertList = res.data.data.list;
     // },
+    toSelect(){
+      this.$router.push("/select")
+    },
     async getPhoto() {
       var pageNum = 1;
       var pageSize = 50;
@@ -357,6 +360,9 @@ export default {
       const res = await axios.get("/main/getUserInfo");
       this.data = res.data.data;
     },
+    toRevision(){
+        this.$router.push("/revision")
+      },
     tomain: function (index) {
       // console.log(index)
       localStorage.setItem("index", JSON.stringify(index));

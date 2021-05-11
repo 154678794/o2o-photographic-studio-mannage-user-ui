@@ -18,8 +18,8 @@
               mode="horizontal"
               @select="handleSelect"
             >
-              <el-menu-item index="1">自选套餐</el-menu-item>
-              <el-menu-item index="2">修图</el-menu-item>
+              <el-menu-item index="1" @click="toSelect">自选套餐</el-menu-item>
+              <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
                 <el-menu-item index="2-1">我的信息</el-menu-item>
@@ -105,6 +105,9 @@ export default {
     toOrderDetail() {
       this.$router.push("/orderDetail");
     },
+    toRevision(){
+        this.$router.push("/revision")
+      },
     loginOut() {
       axios.get("/user/userLoginOut");
       this.$message.success("退出成功");
@@ -113,6 +116,9 @@ export default {
     async getUserinfo() {
       const res = await axios.get("/main/getUserInfo");
       this.data = res.data.data;
+    },
+    toSelect(){
+      this.$router.push("/select")
     },
   },
   created: function () {

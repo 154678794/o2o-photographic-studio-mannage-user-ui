@@ -19,8 +19,8 @@
               mode="horizontal"
               @select="handleSelect"
             >
-              <el-menu-item index="1">自选套餐</el-menu-item>
-              <el-menu-item index="2">修图</el-menu-item>
+              <el-menu-item index="1"  @click="toSelect">自选套餐</el-menu-item>
+              <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
                 <el-menu-item index="2-1">我的信息</el-menu-item>
@@ -481,6 +481,12 @@ export default {
     toMap() {
       this.getLocation(); // 调用获取地理位置
     },
+    toSelect(){
+      this.$router.push("/select")
+    },
+    toRevision(){
+        this.$router.push("/revision")
+      },
     async getComment() {
       const packId = JSON.parse(localStorage.getItem("trueV"));
       const res = await axios({
