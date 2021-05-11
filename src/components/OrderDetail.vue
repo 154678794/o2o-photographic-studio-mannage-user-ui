@@ -92,7 +92,7 @@
           </span>
         </div>
         <div class="aside">
-          <div>关注公众号</div>
+          <div style="text-align:center;margin-bottom:15px">关注公众号</div>
           <div style="width: 144px; height: 140px; margin: 0 auto">
             <img
               style="width: 100%; height: 100%"
@@ -405,7 +405,7 @@ a {
 .footer {
   width: 1200px;
   margin: 0 auto;
-  text-align: center;
+  
   color: #fff;
   height: 200px;
   background: #282c31;
@@ -431,6 +431,7 @@ a {
   width: 100%;
   height: 26px;
   float: left;
+  text-align: center;
 }
 /* .logo {
   clear: both;
@@ -442,12 +443,13 @@ a {
   margin-left: 50px;
 } */
 .txt {
-  width: 376px;
+  width: 100%;
   height: 74px;
   float: left;
   margin: 24px 0 0 0px;
   font-size: 16px;
   line-height: 20px;
+  margin-left:50px;
   color: #666c74;
 }
 .aside {

@@ -44,7 +44,7 @@
     <div class="header">商户信息</div>
     <div class="mainO marginB">
       <div class="width100 borderB">营业时间</div>
-      <div class="width100">周一至周日08.30-21.00</div>
+      <div class="width100">周一至周日&nbsp;&nbsp;08.30-21.00</div>
     </div>
     <div class="mianT marginB">
       <div class="width100 borderB">免费wifi</div>
@@ -53,7 +53,7 @@
     <div class="mainTh">
       <div class="width100 borderB">环境信息</div>
       <div class="width100">
-        <span>有吸烟区</span> <span>有无烟区</span> <span>有充电线</span>
+        <span>有吸烟区</span>&nbsp; &nbsp;&nbsp;<span>有无烟区</span>&nbsp;&nbsp;&nbsp; <span>有充电线</span>&nbsp;&nbsp;&nbsp;
         <span>有充电宝</span>
       </div>
     </div>
@@ -77,7 +77,7 @@
           </span>
         </div>
         <div class="aside">
-          <div style="margin-bottom: 10px">关注公众号</div>
+          <div class="focusOn">关注公众号</div>
           <div style="width: 144px; height: 140px; margin: 0 auto">
             <img
               style="width: 100%; height: 100%"
@@ -121,6 +121,10 @@ export default {
 };
 </script>
 <style scoped>
+a {
+  text-decoration: none;
+  color: black;
+}
 .header {
   width: 100%;
   text-align: center;
@@ -146,7 +150,6 @@ export default {
 }
 .footer {
   width: 100%;
-  text-align: center;
   background: #597e72;
   color: #fff;
 }
@@ -224,7 +227,6 @@ export default {
 .footer {
   width: 1300px;
   margin: 0 auto;
-  text-align: center;
   color: #fff;
   height: 200px;
   background: #282c31;
@@ -247,17 +249,17 @@ export default {
   width: 100%;
   height: 26px;
   float: left;
+  text-align: center;
 }
 .txt {
-  width: 576px;
+  width: 100%;
   height: 74px;
   float: left;
   margin: 24px 0 0 0px;
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  position: relative;
-  left: -60px;
+  padding-left:90px;
 }
 .aside {
   width: 21%;
@@ -268,5 +270,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.focusOn{
+  margin-bottom: 10px;
+  text-align:center
 }
 </style>

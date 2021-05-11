@@ -64,7 +64,7 @@
       </div>
     </div>
     <div class="mainCon animate__animated animate__lightSpeedInRight">
-      <img class="imageS" :src="list[index].url" alt="" />
+      <img class="imageS" :src="list[Number(index)].url" alt="" />
     </div>
     <div class="article">
       <p class="text margin0 padding20">古装源摄影店(步行街店)</p>
@@ -360,7 +360,7 @@
           </span>
         </div>
         <div class="aside">
-          <div style="margin-bottom:1px">关注公众号</div>
+          <div style="margin-bottom:10px;text-align:center">关注公众号</div>
           <div style="width: 144px; height: 140px; margin: 0 auto">
             <img
               style="width: 100%; height: 100%"
@@ -687,7 +687,6 @@ a {
 .footer {
   width: 70%;
   margin: 0 auto;
-  text-align: center;
   color: #fff;
   height: 200px;
   background: #282c31;
@@ -710,6 +709,7 @@ a {
   border-right: 1px solid #14161a;
 }
 .link {
+  text-align: center;
   width: 100%;
   height: 26px;
   float: left;
@@ -724,15 +724,14 @@ a {
   margin-left: 50px;
 } */
 .txt {
-  width: 576px;
+  width: 100%;
   height: 74px;
   float: left;
   margin: 24px 0 0 0px;
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  position: relative;
-  left: -60px;
+  margin-left:12.5%;
 }
 .aside {
   width: 21%;
