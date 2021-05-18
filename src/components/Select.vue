@@ -9,7 +9,7 @@
               v-model="input"
               placeholder="请输入套餐"
             ></el-input> -->
-            <img src="../assets/logo.png" alt="" />
+            <img @click="toAbout" src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -265,6 +265,9 @@ export default {
     },
     toMessage(){
       this.$router.push("/message")
+    },
+    toAbout(){
+      this.$router.push("/about")
     },
     toRevision(){
         this.$router.push("/revision")

@@ -1,4 +1,4 @@
-# newdemo
+# O2o摄影管理平台
 
 ## Project setup
 ```

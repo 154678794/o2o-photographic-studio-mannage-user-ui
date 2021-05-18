@@ -9,7 +9,7 @@
               v-model="input"
               placeholder="请输入套餐"
             ></el-input> -->
-            <img src="../assets/logo.png" alt="" />
+            <img @click="toAbout" src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -190,6 +190,9 @@ export default {
     toRevision() {
       this.$router.push("/revision");
     },
+    toAbout(){
+      this.$router.push("/about");
+    },
     loginOut() {
       axios.get("/user/userLoginOut");
       this.$message.success("退出成功");
@@ -211,7 +214,15 @@ export default {
         password: this.data.password,
       };
       console.log(generalUserEntity);
-      // const res = await axios.post("/userManager/updateUser",)
+      const res = await axios.post("/userManager/updateUser",generalUserEntity)
+      console.log(res)
+      if(res.data.data =="更新用户成功"){
+          this.$message.success("更新用户成功")
+          this.getUserinfo()
+      }
+      else{
+          this.$message.error("更新用户失败")
+      }
     },
     toSelect() {
       this.$router.push("/select");
@@ -269,7 +280,7 @@ a {
   padding-top: 8px;
   text-align: center;
   width: 1200px;
-  height: 700px;
+  height: 600px;
   margin: 0 auto;
   background-color: #fff;
 }
