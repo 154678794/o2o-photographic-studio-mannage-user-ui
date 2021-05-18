@@ -335,7 +335,8 @@
         <el-button type="primary" @click="toBook">确 定</el-button>
       </span>
     </el-dialog>
-    <div class="footer">
+    <div style="width:100%;background: #282c31;">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -365,6 +366,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -694,7 +696,7 @@ a {
   height: 100px;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -740,7 +742,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  margin-left:18%;
+  margin-left:50px;
 }
 .aside {
   width: 21%;

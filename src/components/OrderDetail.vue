@@ -51,6 +51,7 @@
           <el-button
             @click="toChoose(item.orderId)"
             style="background-color: #14161a"
+            :disabled="item.hasPay==='是'?false:true"
             >选片</el-button
           >
         </div>
@@ -68,7 +69,8 @@
         </div>
       </div>
     </div>
-    <div class="footer">
+    <div style="width:100%;background: #282c31;">
+      <div class="footer" >
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -98,6 +100,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -266,7 +269,7 @@ a {
   min-height: 600px;
   display: flex;
   flex-direction: column;
-  width: 1000px;
+  width: 1100px;
   margin: 0 auto;
 }
 .meal {
@@ -413,7 +416,7 @@ a {
   height: 100px;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   
   color: #fff;

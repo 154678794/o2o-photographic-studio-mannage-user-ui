@@ -42,12 +42,12 @@
     <div class="message">
       <p class="fontx">个人信息</p>
       <p>
-        <span class="colore">用户名</span
+        <span class="colore" style="position: relative; left: 8px">用户名</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input class="inputStyle" type="text" v-model="data.username" />
       </p>
       <p>
-        <span class="colore">真实姓名</span
+        <span class="colore" style="position: relative; left: -3px">真实姓名</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
           class="inputStyle"
           type="text"
@@ -55,7 +55,7 @@
         />
       </p>
       <p>
-        <span class="colore">密码</span
+        <span class="colore" style="position: relative; left: 13px">密码</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
           class="inputStyle"
           type="password"
@@ -63,7 +63,7 @@
         />
       </p>
       <p>
-        <span class="colore">确认密码</span
+        <span class="colore" style="position: relative; left: -1px">确认密码</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
           class="inputStyle"
           type="password"
@@ -73,7 +73,7 @@
       </p>
       <span v-if="isShow" style="color: red">确认密码有误</span>
       <p>
-        <span class="colore">电话号码</span
+        <span class="colore" style="position: relative; left: -3px">电话号码</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- <input
                 class="inputStyle"
@@ -85,23 +85,23 @@
         }}</span>
       </p>
       <p>
-        <span class="colore" style="position: relative; left: -103px">性别</span
+        <span class="colore" style="position: relative; left: -90px">性别</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <el-radio
           style="position: relative; left: -103px"
-          v-model="data.sex"
+          v-model="sex"
           label="1"
           >男</el-radio
         >
         <el-radio
           style="position: relative; left: -103px"
-          v-model="data.sex"
+          v-model="sex"
           label="2"
           >女</el-radio
         >
       </p>
       <p>
-        <span class="colore">生日</span
+        <span class="colore" style="position: relative; left: 13px">生日</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- <input
                 class="inputStyle"
@@ -113,7 +113,7 @@
         }}</span>
       </p>
       <p>
-        <span class="colore">余额</span
+        <span class="colore" style="position: relative; left: 13px">余额</span
         >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <!-- <input
                 class="inputStyle"
@@ -126,7 +126,8 @@
       </p>
       <el-button @click="ModifiedM" :disabled="isShow||!quert">修改提交</el-button>
     </div>
-    <div class="footer">
+    <div style="width:100%;background: #282c31;">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -158,6 +159,7 @@
       </div>
     </div>
   </div>
+    </div>
 </template>
 <script>
 import axios from "axios";
@@ -168,6 +170,7 @@ export default {
       passwordd: "",
       quert: "",
       isShow: false,
+      sex:''
     };
   },
   methods: {
@@ -201,6 +204,7 @@ export default {
     async getUserinfo() {
       const res = await axios.get("/main/getUserInfo");
       this.data = res.data.data;
+      this.sex = res.data.data.sex.toString()
       console.log(this.data);
     },
     async ModifiedM() {
@@ -208,10 +212,10 @@ export default {
         birth: this.data.birth,
         money: this.data.money,
         username: this.data.username,
-        sex: this.data.sex,
+        sex: Number(this.sex),
         realName: this.data.realName,
         phoneNum: this.data.phoneNum,
-        password: this.data.password,
+        password: this.passwordd
       };
       console.log(generalUserEntity);
       const res = await axios.post("/userManager/updateUser",generalUserEntity)
@@ -291,7 +295,7 @@ a {
   margin-bottom: 20px;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   background: #597e72;
   color: #fff;
 }
@@ -367,7 +371,7 @@ a {
   border-bottom: none;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -401,7 +405,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  padding-left: 90px;
+  padding-left: 52px;
 }
 .aside {
   width: 21%;

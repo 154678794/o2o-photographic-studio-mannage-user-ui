@@ -46,8 +46,6 @@
           class="imageC"
           v-for="(item, index) in picture"
           :key="item.photoId"
-          
-          
         >
           <img
             style="max-width: 100%; max-height: 100%;width:100%"

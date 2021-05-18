@@ -137,7 +137,7 @@
           <!-- <img
             style="max-width:100;max-height:100%;width:100%"
             class="imgS"
-            src="../assets/tt1.jpg"
+            src="../assets/tt2.jpg"
             alt=""
           /> -->
         </div>
@@ -178,7 +178,8 @@
       </div>
       <div style="margin-left:20px;font-size:20px" @click="flag = !flag">加载更多...</div>
     </div>
-    <div class="footer">
+    <div style="width:100%;background: #282c31;">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -202,6 +203,7 @@
           <div style="width:144px;height:140px;margin:0 auto"><img style="width:100%;height:100%" src="../assets/erweima.png" alt=""></div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -642,10 +644,11 @@ a {
   border-top: none;
   border-left: none;
   background: #fff;
+  display:inline-block;
   vertical-align: top;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -691,7 +694,7 @@ a {
     font-size: 16px;
     line-height: 20px;
     color: #666c74;
-    margin-left: 234px;
+    margin-left: 50px;
 }
 .aside{
   width: 21%;

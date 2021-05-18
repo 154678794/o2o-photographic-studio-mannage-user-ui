@@ -172,7 +172,8 @@
         <el-button type="info" style="width:130px;margin-bottom:20px">立即下单</el-button>
       </div>
     </div>
-    <div class="footer">
+    <div style="width:100%;background:#282c31">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -202,6 +203,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -468,7 +470,7 @@ input {
   margin-bottom: 20px;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   background: #597e72;
   color: #fff;
 }
@@ -544,7 +546,7 @@ input {
   border-bottom: none;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -578,7 +580,7 @@ input {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  padding-left: 90px;
+  padding-left: 50px;
 }
 .el-menu.el-menu--horizontal{
   border:none !important;
