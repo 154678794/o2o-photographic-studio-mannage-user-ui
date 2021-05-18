@@ -39,7 +39,7 @@
     <div class="revision">
       <div class="mainimage">
         <div class="imageItem" v-for="(item, index) in list" :key="index">
-          <img style="max-width:100%;max-height:100%" :src="item" alt="" />
+          <img style="max-width:100%;max-height:100%;width:100%" :src="item" alt="" />
         </div>
       </div>
       <div style="margin-left: 26px; margin-top: 20px">

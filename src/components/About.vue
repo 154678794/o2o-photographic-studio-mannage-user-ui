@@ -129,11 +129,17 @@
       >
         <div class="picture">
           <img
-            style="max-width:100;max-height:100%"
+            style="max-width:100%;max-height:100%;width:100%"
             class="imgS"
             :src="item.referencePicture"
             alt=""
           />
+          <!-- <img
+            style="max-width:100;max-height:100%;width:100%"
+            class="imgS"
+            src="../assets/tt1.jpg"
+            alt=""
+          /> -->
         </div>
         <div class="infoT">
           {{ item.packName }}
@@ -168,7 +174,7 @@
         v-for="(item, index) in even(photoList)"
         :key="index"
       >
-        <img style="max-width:100%;max-height:100%;" :src="item.photoUrl" alt="" />
+        <img style="max-width:100%;max-height:100%;width:100%" :src="item.photoUrl" alt="" />
       </div>
       <div style="margin-left:20px;font-size:20px" @click="flag = !flag">加载更多...</div>
     </div>
@@ -508,12 +514,10 @@ a {
   height: 218px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  display: inline-block;
   font-size: 12px;
   margin-top:15px;
   border: 1px solid #f2f2f2;
   background: #fff;
-  vertical-align: top;
 }
 .rmb {
   vertical-align: baseline;
@@ -633,7 +637,6 @@ a {
   width: 260px;
   height: 208px;
   box-sizing: border-box;
-  display: inline-block;
   font-size: 12px;
   border: 1px solid #f2f2f2;
   border-top: none;

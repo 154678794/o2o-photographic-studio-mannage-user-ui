@@ -50,7 +50,7 @@
           
         >
           <img
-            style="max-width: 100%; max-height: 100%"
+            style="max-width: 100%; max-height: 100%;width:100%"
             :src="item.photoUrl"
             @click.prevent="makeChange(index)"
             :class="currentIndex.indexOf(index) !== -1 ? 'actived' : ''"
