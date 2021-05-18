@@ -10,7 +10,7 @@
             background: url(../assets/logo.png) no-repeat;
               placeholder="请输入套餐"
             ></el-input> -->
-            <img src="../assets/logo.png" alt="" />
+            <img @click="toAbout" src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -19,17 +19,13 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
                   </el-badge></el-menu-item
                 >
-                <el-menu-item index="2-3"
-                  ><el-badge :value="200" :max="99" class="item">
-                    我的选片
-                  </el-badge></el-menu-item
-                >
+                
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
               </el-submenu>
               <el-menu-item index="4">余额:￥{{ data.money }}</el-menu-item>
@@ -134,6 +130,12 @@ export default {
     },
     toSelect(){
       this.$router.push("/select")
+    },
+    toMessage(){
+      this.$router.push("/message")
+    },
+    toAbout(){
+      this.$router.push("/about")
     },
     toRevision(){
         this.$router.push("/revision")
@@ -250,7 +252,6 @@ a {
   border-bottom: 2px solid #fefeff;
 }
 .topbar {
-  margin-bottom: 20px;
   background: #1a1a1c;
   padding: 20px;
 }
@@ -259,6 +260,9 @@ a {
   margin: 0 auto;
 }
 .main {
+  padding-top:20px;
+  padding-left:20px;
+  background-color: #fff;
   min-height: 600px;
   display: flex;
   flex-direction: column;
@@ -409,7 +413,7 @@ a {
   height: 100px;
 }
 .footer {
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
   
   color: #fff;

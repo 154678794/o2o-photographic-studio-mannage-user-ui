@@ -9,7 +9,7 @@
               v-model="input"
               placeholder="请输入套餐"
             ></el-input> -->
-            <img @click="toAbout" src="../assets/logo.png" alt="" />
+            <img src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -22,13 +22,15 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage"
+                  >我的信息</el-menu-item
+                >
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
                   </el-badge></el-menu-item
                 >
-                
+
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
               </el-submenu>
               <el-menu-item index="4">余额:￥{{ data.money }}</el-menu-item>
@@ -37,21 +39,92 @@
         </div>
       </div>
     </div>
-    <div class="header">商户信息</div>
-    <div class="mainO marginB">
-      <div class="width100 borderB">营业时间</div>
-      <div class="width100">周一至周日&nbsp;&nbsp;08.30-21.00</div>
-    </div>
-    <div class="mianT marginB">
-      <div class="width100 borderB">免费wifi</div>
-      <div class="width100">免费wifi</div>
-    </div>
-    <div class="mainTh">
-      <div class="width100 borderB">环境信息</div>
-      <div class="width100">
-        <span>有吸烟区</span>&nbsp; &nbsp;&nbsp;<span>有无烟区</span>&nbsp;&nbsp;&nbsp; <span>有充电线</span>&nbsp;&nbsp;&nbsp;
-        <span>有充电宝</span>
-      </div>
+    <div class="message">
+      <p class="fontx">个人信息</p>
+      <p>
+        <span class="colore">用户名</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="inputStyle" type="text" v-model="data.username" />
+      </p>
+      <p>
+        <span class="colore">真实姓名</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+          class="inputStyle"
+          type="text"
+          v-model="data.realName"
+        />
+      </p>
+      <p>
+        <span class="colore">密码</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+          class="inputStyle"
+          type="password"
+          v-model="passwordd"
+        />
+      </p>
+      <p>
+        <span class="colore">确认密码</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+          class="inputStyle"
+          type="password"
+          v-model="quert"
+          @input="alert11()"
+        />
+      </p>
+      <span v-if="isShow" style="color: red">确认密码有误</span>
+      <p>
+        <span class="colore">电话号码</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <input
+                class="inputStyle"
+                type="text"
+                v-model="data.phoneNum"
+              /> -->
+        <span style="display: inline-block; width: 310px; text-align: left">{{
+          data.phoneNum
+        }}</span>
+      </p>
+      <p>
+        <span class="colore" style="position: relative; left: -103px">性别</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <el-radio
+          style="position: relative; left: -103px"
+          v-model="data.sex"
+          label="1"
+          >男</el-radio
+        >
+        <el-radio
+          style="position: relative; left: -103px"
+          v-model="data.sex"
+          label="2"
+          >女</el-radio
+        >
+      </p>
+      <p>
+        <span class="colore">生日</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <input
+                class="inputStyle"
+                type="text"
+                v-model="data.birth"
+              /> -->
+        <span style="display: inline-block; width: 310px; text-align: left">{{
+          data.birth
+        }}</span>
+      </p>
+      <p>
+        <span class="colore">余额</span
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <input
+                class="inputStyle"
+                type="text"
+                v-model="data.money"
+              /> -->
+        <span style="display: inline-block; width: 310px; text-align: left">{{
+          data.money
+        }}</span>
+      </p>
+      <el-button @click="ModifiedM" :disabled="isShow||!quert">修改提交</el-button>
     </div>
     <div class="footer">
       <div class="wrapper">
@@ -92,24 +165,31 @@ export default {
   data() {
     return {
       data: {},
+      passwordd: "",
+      quert: "",
+      isShow: false,
     };
   },
   methods: {
+    alert11() {
+    if(this.quert === ''){
+        this.isShow = false
+    }else{
+        this.isShow = !(this.quert == this.passwordd)
+    }
+    },
+    toMessage() {
+      this.$router.push("/message");
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    },
-    toAbout(){
-      this.$router.push("/about")
-    },
-    toMessage(){
-      this.$router.push("/message")
     },
     toOrderDetail() {
       this.$router.push("/orderDetail");
     },
-    toRevision(){
-        this.$router.push("/revision")
-      },
+    toRevision() {
+      this.$router.push("/revision");
+    },
     loginOut() {
       axios.get("/user/userLoginOut");
       this.$message.success("退出成功");
@@ -118,9 +198,23 @@ export default {
     async getUserinfo() {
       const res = await axios.get("/main/getUserInfo");
       this.data = res.data.data;
+      console.log(this.data);
     },
-    toSelect(){
-      this.$router.push("/select")
+    async ModifiedM() {
+      const generalUserEntity = {
+        birth: this.data.birth,
+        money: this.data.money,
+        username: this.data.username,
+        sex: this.data.sex,
+        realName: this.data.realName,
+        phoneNum: this.data.phoneNum,
+        password: this.data.password,
+      };
+      console.log(generalUserEntity);
+      // const res = await axios.post("/userManager/updateUser",)
+    },
+    toSelect() {
+      this.$router.push("/select");
     },
   },
   created: function () {
@@ -137,18 +231,47 @@ a {
   width: 100%;
   text-align: center;
   font-size: 24px;
-  height:50px;
+  height: 50px;
   font-weight: bold;
   padding-top: 10px;
 }
+.colore {
+  display: inline-block;
+  width: 70px;
+  color: rgba(124, 121, 121, 0.616);
+}
+.fontx {
+  font-size: 20px;
+}
+.inputStyle {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  width: 300px;
+  height: 25px;
+  margin: 5px 0;
+  border: none !important;
+  padding: 8px 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background: #fff;
+}
 .width100 {
-  padding-left:30px;
+  padding-left: 30px;
   margin: 0 auto;
   width: 1270px;
   background-color: #fff;
   height: 80px;
   display: flex;
   align-items: center;
+}
+.message {
+  padding-top: 8px;
+  text-align: center;
+  width: 1200px;
+  height: 700px;
+  margin: 0 auto;
+  background-color: #fff;
 }
 .borderB {
   border-bottom: 2px solid #ccc;
@@ -267,7 +390,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  padding-left:240px;
+  padding-left: 90px;
 }
 .aside {
   width: 21%;
@@ -279,8 +402,11 @@ a {
   flex-direction: column;
   justify-content: center;
 }
-.focusOn{
+.focusOn {
   margin-bottom: 10px;
-  text-align:center
+  text-align: center;
+}
+.el-menu.el-menu--horizontal {
+    border-bottom: none !important;
 }
 </style>

@@ -9,7 +9,7 @@
               v-model="input"
               placeholder="请输入套餐"
             ></el-input> -->
-            <img src="../assets/logo.png" alt="" />
+            <img @click="toAbout" src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -22,15 +22,10 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
-                  </el-badge></el-menu-item
-                >
-                <el-menu-item index="2-3"
-                  ><el-badge :value="200" :max="99" class="item">
-                    我的选片
                   </el-badge></el-menu-item
                 >
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
@@ -44,7 +39,7 @@
     <div class="revision">
       <div class="mainimage">
         <div class="imageItem" v-for="(item, index) in list" :key="index">
-          <img :src="item" alt="" />
+          <img style="max-width:100%;max-height:100%" :src="item" alt="" />
         </div>
       </div>
       <div style="margin-left: 26px; margin-top: 20px">
@@ -159,6 +154,9 @@ export default {
     toSelect() {
       this.$router.push("/select");
     },
+    toAbout(){
+      this.$router.push("/about");
+    },
     toRevision() {
       this.$router.push("/revision");
     },
@@ -167,6 +165,9 @@ export default {
     },
     toOrderDetail() {
       this.$router.push("/orderDetail");
+    },
+    toMessage(){
+      this.$router.push("/message")
     },
     loginOut() {
       axios.get("/user/userLoginOut");
@@ -179,10 +180,10 @@ export default {
       console.log(this.data);
     },
     open2() {
+        const h = this.$createElement
         this.$notify({
           title: '提示',
-          message: '请先上传照片文件之后再提交呦',
-          duration: 0,
+          message: h('i', { style: 'color: teal'}, '请先上传照片文件之后再提交呦'),
           offset: 100
         });
       },
@@ -264,6 +265,9 @@ a {
   flex-wrap: wrap;
 }
 .imageItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 210px;
   height: 220px;
   background-color: #eee;
@@ -404,7 +408,7 @@ textarea {
 }
 .footer {
     margin-top:15px;
-  width: 1300px;
+  width: 100%;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -438,7 +442,7 @@ textarea {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  padding-left: 90px;
+  padding-left: 240px;
 }
 .aside {
   width: 21%;

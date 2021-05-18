@@ -22,17 +22,13 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
                   </el-badge></el-menu-item
                 >
-                <el-menu-item index="2-3"
-                  ><el-badge :value="200" :max="99" class="item">
-                    我的选片
-                  </el-badge></el-menu-item
-                >
+                
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
               </el-submenu>
               <el-menu-item index="4">余额:￥{{ data.money }}</el-menu-item>
@@ -266,6 +262,9 @@ export default {
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    toMessage(){
+      this.$router.push("/message")
     },
     toRevision(){
         this.$router.push("/revision")
@@ -542,7 +541,7 @@ input {
   border-bottom: none;
 }
 .footer {
-  width: 1300px;
+  width: 100%;
   margin: 0 auto;
   color: #fff;
   height: 200px;

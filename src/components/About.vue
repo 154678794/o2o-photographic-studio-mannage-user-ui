@@ -3,7 +3,7 @@
     <div class="topbar">
       <div class="container">
         <div class="row">
-          <div>
+          <div @click="toAbout"> 
             <!-- <el-input
               suffix-icon="el-icon-shopping-bag-1"
               v-model="input"
@@ -22,17 +22,13 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{data.username}}</template>
-                <el-menu-item index="2-1">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge  :value="200" :max="99" class="item">
                     我的订单
                   </el-badge></el-menu-item
                 >
-                <el-menu-item index="2-3"
-                  ><el-badge :value="200" :max="99" class="item">
-                    我的选片
-                  </el-badge></el-menu-item
-                >
+                
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
               </el-submenu>
               <el-menu-item index="4">余额:￥{{data.money}}</el-menu-item>
@@ -133,7 +129,7 @@
       >
         <div class="picture">
           <img
-            @click="toWelcome(index)"
+            style="max-width:100;max-height:100%"
             class="imgS"
             :src="item.referencePicture"
             alt=""
@@ -172,7 +168,7 @@
         v-for="(item, index) in even(photoList)"
         :key="index"
       >
-        <img :src="item.photoUrl" alt="" />
+        <img style="max-width:100%;max-height:100%;" :src="item.photoUrl" alt="" />
       </div>
       <div style="margin-left:20px;font-size:20px" @click="flag = !flag">加载更多...</div>
     </div>
@@ -258,6 +254,12 @@ export default {
     // },
     toSelect(){
       this.$router.push("/select")
+    },
+    toMessage(){
+      this.$router.push("/message")
+    },
+    toAbout(){
+      this.$router.push("/about")
     },
     async getPhoto() {
       var pageNum = 1;
@@ -369,7 +371,11 @@ export default {
       this.$router.push("/welcome");
     },
     toWelcome: function (index) {
-      console.log(this.quertList[index]);
+      const referencePicture = this.quertList[index].referencePicture
+      localStorage.setItem(
+        "referencePicture",
+        referencePicture
+      );
       localStorage.setItem(
         "trueV",
         JSON.stringify(this.quertList[index].packId)
@@ -495,6 +501,9 @@ a {
   height: 1px;
 }
 .picture {
+  display:flex;
+  align-items:center;
+  justify-content: center;
   width: 236px;
   height: 218px;
   -webkit-box-sizing: border-box;
@@ -618,6 +627,9 @@ a {
   padding-left: 10px;
 }
 .containd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 260px;
   height: 208px;
   box-sizing: border-box;
@@ -630,7 +642,7 @@ a {
   vertical-align: top;
 }
 .footer {
-  width: 1300px;
+  width: 100%;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -676,7 +688,7 @@ a {
     font-size: 16px;
     line-height: 20px;
     color: #666c74;
-    margin-left: 90px;
+    margin-left: 234px;
 }
 .aside{
   width: 21%;

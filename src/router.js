@@ -9,6 +9,7 @@ import OrderDetail from './components/OrderDetail.vue'
 import Choose from './components/Choose.vue'
 import Select from './components/Select.vue'
 import Revision from './components/Revision.vue'
+import Message from './components/Message.vue'
 Vue.use(Router)
 const router = new Router({
   base: process.env.BASE_URL,
@@ -44,7 +45,8 @@ const router = new Router({
     { path: '/orderDetail', component: OrderDetail },
     { path: '/choose', component: Choose },
     { path: '/select', component: Select },
-    { path: '/revision', component: Revision }
+    { path: '/revision', component: Revision },
+    { path: '/message', component: Message }
   ]
 })
 //挂载路由导航守卫

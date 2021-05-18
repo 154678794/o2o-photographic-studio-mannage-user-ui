@@ -10,7 +10,7 @@
             background: url(../assets/logo.png) no-repeat;
               placeholder="请输入套餐"
             ></el-input> -->
-            <img src="../assets/logo.png" alt="" />
+            <img @click="toAbout" src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -23,15 +23,10 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
-                  </el-badge></el-menu-item
-                >
-                <el-menu-item index="2-3"
-                  ><el-badge :value="200" :max="99" class="item">
-                    我的选片
                   </el-badge></el-menu-item
                 >
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
@@ -64,7 +59,7 @@
       </div>
     </div>
     <div class="mainCon animate__animated animate__lightSpeedInRight">
-      <img class="imageS" :src="list[Number(index)].url" alt="" />
+      <img class="imageS" :src="referencePicture? referencePicture:list[Number(index)].url" alt="" />
     </div>
     <div class="article">
       <p class="text margin0 padding20">古装源摄影店(步行街店)</p>
@@ -484,9 +479,15 @@ export default {
     toSelect(){
       this.$router.push("/select")
     },
+    toAbout(){
+        this.$router.push("/about")
+    },
     toRevision(){
         this.$router.push("/revision")
       },
+      toMessage(){
+      this.$router.push("/message")
+    },
     async getComment() {
       const packId = JSON.parse(localStorage.getItem("trueV"));
       const res = await axios({
@@ -524,6 +525,8 @@ export default {
   async created() {
     this.getUserinfo();
     this.getComment();
+    const referencePicture = localStorage.getItem('referencePicture')
+    this.referencePicture = referencePicture
     const packId = JSON.parse(localStorage.getItem("trueV"));
     const index = JSON.parse(localStorage.getItem("index"));
     this.index = index;
@@ -691,7 +694,7 @@ a {
   height: 100px;
 }
 .footer {
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -737,7 +740,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  margin-left:12.5%;
+  margin-left:18%;
 }
 .aside {
   width: 21%;

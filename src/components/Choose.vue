@@ -10,7 +10,7 @@
             background: url(../assets/logo.png) no-repeat;
               placeholder="请输入套餐"
             ></el-input> -->
-            <img src="../assets/logo.png" alt="" />
+            <img @click="toAbout" src="../assets/logo.png" alt="" />
           </div>
           <div class="marginA animate__animated animate__zoomInDown"></div>
           <div class="rightF">
@@ -19,15 +19,10 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
-                  </el-badge></el-menu-item
-                >
-                <el-menu-item index="2-3"
-                  ><el-badge :value="200" :max="99" class="item">
-                    我的选片
                   </el-badge></el-menu-item
                 >
                 <el-menu-item index="2-3" @click="loginOut">登出</el-menu-item>
@@ -122,6 +117,9 @@ export default {
     toSelect(){
       this.$router.push("/select")
     },
+    toMessage(){
+      this.$router.push("/message")
+    },
     async getUserinfo() {
       const res = await axios.get("/main/getUserInfo");
       this.data = res.data.data;
@@ -198,7 +196,9 @@ export default {
     toChoose() {
       this.$router.push("/choose");
     },
-
+    toAbout(){
+      this.$router.push("/about");
+    },
     async getAllChoose() {
       const orderId = JSON.parse(localStorage.getItem("orderId"));
       const res = await axios({
@@ -237,7 +237,6 @@ a {
   border-bottom: 2px solid #fefeff;
 }
 .topbar {
-  margin-bottom: 20px;
   background: #1a1a1c;
   padding: 20px;
 }
@@ -256,12 +255,13 @@ a {
   align-items: center;
 }
 .main {
+  padding-top:20px;
+  background-color: #fff;
   min-height: 600px;
   display: flex;
   width: 1180px;
   margin: 0 auto;
   flex-direction: column;
-  border: 1px solid grey;
   padding: 20px 10px 0px 10px;
 }
 .meal {
@@ -408,7 +408,7 @@ a {
   height: 100px;
 }
 .footer {
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -455,7 +455,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  margin-left:50px;
+  margin-left:240px;
 }
 .aside {
   width: 21%;
