@@ -101,7 +101,8 @@
       </div>
       
     </div>
-    <div class="footer">
+    <div style="width:100%;background: #282c31; position:absolute;bottom:0px;">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -131,6 +132,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -328,6 +330,7 @@ textarea {
   background-color: #fff;
   padding-top: 20px;
   padding-bottom:20px;
+  margin-bottom:10px;
 }
 .borderB {
   border-bottom: 2px solid #ccc;
@@ -408,7 +411,7 @@ textarea {
 }
 .footer {
     margin-top:15px;
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -442,7 +445,7 @@ textarea {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  padding-left: 240px;
+  padding-left: 50px;
 }
 .aside {
   width: 21%;

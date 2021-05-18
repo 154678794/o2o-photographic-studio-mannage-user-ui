@@ -126,7 +126,7 @@
       </p>
       <el-button @click="ModifiedM" :disabled="isShow||!quert">修改提交</el-button>
     </div>
-    <div style="width:100%;background: #282c31;">
+    <div style="width:100%;background: #282c31;position:absolute;bottom:0;">
       <div class="footer">
       <div class="wrapper">
         <div class="Lmain">

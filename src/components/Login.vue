@@ -3,7 +3,7 @@
     <div class="login_container" v-if="isShow">
       <div class="login_box">
         <!--登录表单区域-->
-        <h3 class="main-text">欢迎登陆O2o摄影平台</h3>
+        <h3 class="main-text">欢迎登陆O2O摄影平台</h3>
         <el-form
           ref="loginFormRef"
           :rules="loginFormRules"

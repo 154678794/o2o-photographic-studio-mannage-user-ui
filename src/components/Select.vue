@@ -172,7 +172,7 @@
         <el-button type="info" style="width:130px;margin-bottom:20px">立即下单</el-button>
       </div>
     </div>
-    <div style="width:100%;background:#282c31">
+    <div style="width:100%;background:#282c31;position:absolute;bottom:0">
       <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
@@ -471,7 +471,6 @@ input {
 }
 .footer {
   width: 1200px;
-  background: #597e72;
   color: #fff;
 }
 .topbar {

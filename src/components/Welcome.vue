@@ -451,6 +451,7 @@ export default {
           type: "warning",
         })
           .then(async () => {
+            console.log(orderEntity)
             const res = await axios.post("/customOrder/sendOrder", orderEntity);
             console.log(res);
             if (res.data.data === "订单插入成功") {

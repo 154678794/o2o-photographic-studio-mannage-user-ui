@@ -47,13 +47,16 @@
           v-for="(item, index) in picture"
           :key="item.photoId"
         >
-          <img
-            style="max-width: 100%; max-height: 100%;width:100%"
-            :src="item.photoUrl"
-            @click.prevent="makeChange(index)"
+         <div
+         @click="makeChange(index)"
             :class="currentIndex.indexOf(index) !== -1 ? 'actived' : ''"
+         >
+            <img
+            style="max-width: 100%; max-height: 100%；width:100%"
+            :src="item.photoUrl"
             alt=""
           />
+         </div>
         </div>
       </div>
       <div class="dada">
@@ -61,7 +64,8 @@
         <el-button @click="modifiedI">提交</el-button>
       </div>
     </div>
-    <div class="footer">
+    <div style="width:100%;background: #282c31;position:absolute;bottom:0;">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -91,6 +95,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -406,11 +411,12 @@ a {
   height: 100px;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
   background: #282c31;
+  
 }
 .footer .Lmain .link a {
   font-size: 14px;
@@ -453,7 +459,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  margin-left:240px;
+  margin-left:50px;
 }
 .aside {
   width: 21%;
