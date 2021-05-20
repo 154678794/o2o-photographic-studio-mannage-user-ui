@@ -469,7 +469,7 @@ export default {
       const packd = JSON.parse(localStorage.getItem("trueV"));
       const money = this.trueV.packPrice;
       const appoint = this.appointmentTime;
-      const appointmentTime = getNowFormatDate(appoint)
+      const appointmentTime = this.getNowFormatDate(appoint)
       console.log(this.data);
       console.log(packd);
       const orderEntity = {
