@@ -581,7 +581,7 @@ a {
   background-color: #d3dce6;
 }
 .el-carousel__item > img {
-  height: 400px;
+  height: 500px;
   width: 100%;
 }
 .showImg {
