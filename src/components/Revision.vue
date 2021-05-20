@@ -204,12 +204,14 @@ export default {
       // this.file_path = path
     },
     async publish() {
+      const userId = this.data.userId
       var formData = new FormData();
       console.log(document.getElementById("file").files[0]);
       // console.log(photo)
       formData.append("photo", document.getElementById("file").files[0]);
       formData.append("orderType", 3);
-      formData.append("userId", 2);
+      formData.append("userId", userId);
+      //console.log(formData)
       const res = await axios.post("/rights/uploadPhoto", formData);
       this.photoId = res.data.data.split(":")[1];
     },

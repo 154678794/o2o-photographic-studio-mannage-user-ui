@@ -57,6 +57,7 @@
         </div>
         <div class="twoButton">
           <el-button
+          :disabled="item.hasPay==='是'?true:false"
             @click="toQuit(item.orderId,item.price)"
             style="background-color: #14161a"
             >取消订单</el-button

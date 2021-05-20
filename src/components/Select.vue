@@ -571,6 +571,11 @@ input {
   float: left;
   text-align: center;
 }
+.el-button--info:focus, .el-button--info:hover {
+    background: #666c74;
+    border-color: #666c74;
+    color: #FFF;
+}
 .txt {
   width: 100%;
   height: 74px;

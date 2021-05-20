@@ -19,7 +19,9 @@
               <el-menu-item index="2" @click="toRevision">修图</el-menu-item>
               <el-submenu index="3">
                 <template slot="title">{{ data.username }}</template>
-                <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
+                <el-menu-item index="2-1" @click="toMessage"
+                  >我的信息</el-menu-item
+                >
                 <el-menu-item @click="toOrderDetail" index="2-2"
                   ><el-badge :value="200" :max="99" class="item">
                     我的订单
@@ -47,16 +49,15 @@
           v-for="(item, index) in picture"
           :key="item.photoId"
         >
-         <div
-         @click="makeChange(index)"
-            :class="currentIndex.indexOf(index) !== -1 ? 'actived' : ''"
-         >
+          <div>
             <img
-            style="max-width: 100%; max-height: 100%；width:100%"
-            :src="item.photoUrl"
-            alt=""
-          />
-         </div>
+              @click.prevent="makeChange(index)"
+              :class="currentIndex.indexOf(index) !== -1 ? 'actived' : ''"
+              style="max-width: 100%; max-height: 100%；width:100%"
+              :src="item.photoUrl"
+              alt=""
+            />
+          </div>
         </div>
       </div>
       <div class="dada">
@@ -64,38 +65,42 @@
         <el-button @click="modifiedI">提交</el-button>
       </div>
     </div>
-    <div style="width:100%;background: #282c31;position:absolute;bottom:0;">
+    <div
+      style="width: 100%; background: #282c31; position: absolute; bottom: 0"
+    >
       <div class="footer">
-      <div class="wrapper">
-        <div class="Lmain">
-          <span class="link">
-            <a href="">简介</a>
-            <a href="">联系我们</a>
-            <a href="">友情链接</a>
-            <a href="">用户服务协议</a>
-            <a href="">隐私权声明</a>
-            <a href="">法律投诉声明</a>
-            <a href="">网上有害信息举报专区</a>
-          </span>
-          <!-- <span class="logo"></span> -->
-          <span class="txt">
-            <p>版权所有 &nbsp;&nbsp;&nbsp;安徽工程大学</p>
-            <p>违法和不良信息举报电话: 13001902730</p>
-            <p>举报邮箱: fengniao@fengniao.com</p>
-          </span>
-        </div>
-        <div class="aside">
-          <div style="text-align:center;margin-bottom:15px">关注公众号</div>
-          <div style="width: 144px; height: 140px; margin: 0 auto">
-            <img
-              style="width: 100%; height: 100%"
-              src="../assets/erweima.png"
-              alt=""
-            />
+        <div class="wrapper">
+          <div class="Lmain">
+            <span class="link">
+              <a href="">简介</a>
+              <a href="">联系我们</a>
+              <a href="">友情链接</a>
+              <a href="">用户服务协议</a>
+              <a href="">隐私权声明</a>
+              <a href="">法律投诉声明</a>
+              <a href="">网上有害信息举报专区</a>
+            </span>
+            <!-- <span class="logo"></span> -->
+            <span class="txt">
+              <p>版权所有 &nbsp;&nbsp;&nbsp;安徽工程大学</p>
+              <p>违法和不良信息举报电话: 13001902730</p>
+              <p>举报邮箱: fengniao@fengniao.com</p>
+            </span>
+          </div>
+          <div class="aside">
+            <div style="text-align: center; margin-bottom: 15px">
+              关注公众号
+            </div>
+            <div style="width: 144px; height: 140px; margin: 0 auto">
+              <img
+                style="width: 100%; height: 100%"
+                src="../assets/erweima.png"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
@@ -117,11 +122,11 @@ export default {
     };
   },
   methods: {
-    toSelect(){
-      this.$router.push("/select")
+    toSelect() {
+      this.$router.push("/select");
     },
-    toMessage(){
-      this.$router.push("/message")
+    toMessage() {
+      this.$router.push("/message");
     },
     async getUserinfo() {
       const res = await axios.get("/main/getUserInfo");
@@ -133,9 +138,9 @@ export default {
     cancle() {
       this.$router.push("/orderDetail");
     },
-    toRevision(){
-        this.$router.push("/revision")
-      },
+    toRevision() {
+      this.$router.push("/revision");
+    },
     async modifiedI() {
       var checkPhotoVoList = [];
       var orderId = JSON.parse(localStorage.getItem("orderId"));
@@ -154,16 +159,16 @@ export default {
         if (res.data.msg === "check更新成功") {
           this.$message.success("提交成功");
         }
-      }else{
+      } else {
         this.$message.error("请至少选择一张图片");
       }
     },
     open() {
-        this.$notify({
-          message: '点击图片即可选择你喜欢的图片呦！再次点击也可以取消哒!!',
-          offset: 300
-        });
-      },
+      this.$notify({
+        message: "点击图片即可选择你喜欢的图片呦！再次点击也可以取消哒!!",
+        offset: 300,
+      });
+    },
     makeChange(indexJ) {
       console.log(indexJ);
       console.log(indexJ in this.currentIndex);
@@ -199,7 +204,7 @@ export default {
     toChoose() {
       this.$router.push("/choose");
     },
-    toAbout(){
+    toAbout() {
       this.$router.push("/about");
     },
     async getAllChoose() {
@@ -227,7 +232,9 @@ a {
   color: black;
 }
 .actived {
-  background-color: #ccc;
+  filter:grey;
+   -moz-opacity:0.1;
+   opacity:0.1;
 }
 .dada {
   margin: 0 auto;
