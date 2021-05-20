@@ -53,7 +53,8 @@
         <span>有充电宝</span>
       </div>
     </div>
-    <div class="footer">
+    <div style="position:absolute;bottom:0;width:100%;background:#282c31;">
+      <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
           <span class="link">
@@ -83,6 +84,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -157,7 +159,7 @@ a {
   margin-bottom: 20px;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   background: #597e72;
   color: #fff;
 }
@@ -233,7 +235,7 @@ a {
   border-bottom: none;
 }
 .footer {
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
   color: #fff;
   height: 200px;
@@ -267,7 +269,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  padding-left:240px;
+  padding-left:50px;
 }
 .aside {
   width: 21%;
@@ -282,5 +284,8 @@ a {
 .focusOn{
   margin-bottom: 10px;
   text-align:center
+}
+.el-menu.el-menu--horizontal {
+    border-bottom: none !important;
 }
 </style>

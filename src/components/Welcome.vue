@@ -62,7 +62,7 @@
       <img class="imageS" :src="referencePicture? referencePicture:list[Number(index)].url" alt="" />
     </div>
     <div class="article">
-      <p class="text margin0 padding20">古装源摄影店(步行街店)</p>
+      <p class="text margin0 padding20">{{trueV.packName}}</p>
       <el-rate
         class="padding20"
         v-model="value"

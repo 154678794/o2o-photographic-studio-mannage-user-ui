@@ -215,7 +215,8 @@ export default {
         sex: Number(this.sex),
         realName: this.data.realName,
         phoneNum: this.data.phoneNum,
-        password: this.passwordd
+        password: this.passwordd,
+        userId:this.data.userId
       };
       console.log(generalUserEntity);
       const res = await axios.post("/userManager/updateUser",generalUserEntity)
