@@ -101,7 +101,7 @@
       </div>
       
     </div>
-    <div style="width:100%;background: #282c31; position:absolute;bottom:0px;">
+    <div style="width:100%;background: #282c31;">
       <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
@@ -327,12 +327,13 @@ textarea {
 }
 .revision {
   width: 1200px;
-  min-height: 600px;
+  /* min-height: 700px; */
   margin: 0 auto;
   background-color: #fff;
   padding-top: 20px;
   padding-bottom:20px;
   margin-bottom:10px;
+  min-height:calc(100vh - 100px)
 }
 .borderB {
   border-bottom: 2px solid #ccc;

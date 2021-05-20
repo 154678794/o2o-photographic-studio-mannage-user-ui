@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-    <div style="width:100%;background: #282c31;position:absolute;bottom:0;">
+    <div style="width:100%;background: #282c31;">
       <div class="footer" >
       <div class="wrapper">
         <div class="Lmain">
@@ -267,7 +267,7 @@ a {
   padding-top:20px;
   padding-left:20px;
   background-color: #fff;
-  min-height: 600px;
+  min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
   width: 1100px;
