@@ -126,7 +126,7 @@
       </p>
       <el-button @click="ModifiedM" :disabled="isShow||!quert">修改提交</el-button>
     </div>
-    <div style="width:100%;background: #282c31;position:absolute;bottom:0;">
+    <div style="width:100%;background: #282c31;">
       <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
@@ -282,6 +282,7 @@ a {
   align-items: center;
 }
 .message {
+  min-height: calc(100vh - 200px);
   padding-top: 8px;
   text-align: center;
   width: 1200px;

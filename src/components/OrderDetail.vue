@@ -267,7 +267,7 @@ a {
   padding-top:20px;
   padding-left:20px;
   background-color: #fff;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 200px);
   display: flex;
   flex-direction: column;
   width: 1100px;

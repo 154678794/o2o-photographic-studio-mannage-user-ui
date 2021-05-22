@@ -333,7 +333,7 @@ textarea {
   padding-top: 20px;
   padding-bottom:20px;
   margin-bottom:10px;
-  min-height:calc(100vh - 100px)
+  min-height:calc(100vh - 200px)
 }
 .borderB {
   border-bottom: 2px solid #ccc;

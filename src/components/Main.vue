@@ -37,7 +37,8 @@
         </div>
       </div>
     </div>
-    <div class="header">商户信息</div>
+    <div style="min-height:calc(100vh - 200px);">
+      <div class="header">商户信息</div>
     <div class="mainO marginB">
       <div class="width100 borderB">营业时间</div>
       <div class="width100">周一至周日&nbsp;&nbsp;08.30-21.00</div>
@@ -53,7 +54,8 @@
         <span>有充电宝</span>
       </div>
     </div>
-    <div style="position:absolute;bottom:0;width:100%;background:#282c31;">
+    </div>
+    <div style="width:100%;background:#282c31;">
       <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
