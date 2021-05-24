@@ -67,7 +67,7 @@
                 :disabled="!orderEntity.albumId"
               />
             </p>
-            <p>
+            <!-- <p>
               <span class="colore">服装</span
               >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select
                 class="content-type"
@@ -82,16 +82,16 @@
                   {{ list1[index].dressName }}
                 </option>
               </select>
-            </p>
-            <p>
+            </p> -->
+            <!-- :disabled="!orderEntity.dressId" -->
+            <!-- <p>
               <span class="colore">服装数量</span
               >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
                 class="inputStyle"
                 type="text"
                 v-model="orderEntity.dressNum"
-                :disabled="!orderEntity.dressId"
               />
-            </p>
+            </p> -->
             <p>
               <span class="colore">相框</span
               >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select
@@ -168,11 +168,11 @@
           </div>
         </div>
       </div>
-      <div class="buttondo" @click="toSubmit">
-        <el-button type="info" style="width:130px;margin-bottom:20px">立即下单</el-button>
+      <div class="buttondo" >
+        <el-button @click="toSubmit" type="info" style="width:130px;margin-bottom:20px">立即下单</el-button>
       </div>
     </div>
-    <div style="width:100%;background:#282c31;position:absolute;bottom:0">
+    <div style="width:100%;background:#282c31;">
       <div class="footer">
       <div class="wrapper">
         <div class="Lmain">
@@ -218,7 +218,7 @@ export default {
         dressId:null,
         frameId:null,
         frameNum:null,
-        dressNum:null,
+        dressNum:1,
         takeType:'',
         truingNum:null,
         takeNum:null,
@@ -290,21 +290,24 @@ export default {
       if(!this.orderEntity.dressNum){
         this.orderEntity.dressNum = 0
       }
-      const res = await axios.post("/customOrder/sendOrder",this.orderEntity)
-      this.orderEntity = {
-        albumNum:null,
-        albumId:null,
-        dressId:null,
-        frameId:null,
-        frameNum:null,
-        dressNum:null,
-        takeType:'',
-        truingNum:null,
-        takeNum:null,
-        appointmentTime:'',
-        descriptionType:''
-      },
-      console.log(res)
+      // const res = await axios.post("/customOrder/sendOrder",this.orderEntity)
+      // this.orderEntity = {
+      //   albumNum:null,
+      //   albumId:null,
+      //   dressId:null,
+      //   frameId:null,
+      //   frameNum:null,
+      //   dressNum:null,
+      //   takeType:'',
+      //   truingNum:null,
+      //   takeNum:null,
+      //   appointmentTime:'',
+      //   descriptionType:''
+      // },
+      // console.log(res)
+      this.$router.push({path:'/tense',
+      query:orderEntity}
+      )
     },
     toOrderDetail() {
       this.$router.push("/orderDetail");
@@ -462,6 +465,7 @@ input {
   width: 1200px;
   height: 530px;
   margin: 0 auto;
+  min-height:calc(100vh - 200px);
 }
 .reduce {
   background-color: #fff;

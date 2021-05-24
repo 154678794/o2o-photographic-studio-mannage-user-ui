@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="main">
-      <div
+      <!-- <div
         style="
           width: 100%;
           min-height: 500px;
@@ -59,15 +59,40 @@
             />
           </div>
         </div>
+      </div> -->
+      <div
+        style="padding-top: 15px; background-color: white; margin-bottom: 25px"
+      >
+        <div
+          class="contain"
+          v-for="(item, index) in pictureRow"
+          :key="item.dressId"
+          @click.prevent="makeChange(index)"
+        >
+        <!-- @click.prevent="makeChange(index)" -->
+          <div class="picture">
+            <img
+              style="max-width: 100%; max-height: 100%; width: 100%;"
+              :class="currentIndex == index ? 'actived' : ''"
+              :src="item.dressUrl"
+              alt=""
+            />
+            <!-- <img
+            style="max-width:100;max-height:100%;width:100%"
+            class="imgS"
+            src="../assets/tt2.jpg"
+            alt=""
+          /> -->
+          </div>
+          <div class="infoT">{{ item.dressName }}</div>
+        </div>
       </div>
       <div class="dada">
         <el-button @click="cancle">取消</el-button>
         <el-button @click="modifiedI">提交</el-button>
       </div>
     </div>
-    <div
-      style="width: 100%; background: #282c31;"
-    >
+    <div style="width: 100%; background: #282c31">
       <div class="footer">
         <div class="wrapper">
           <div class="Lmain">
@@ -104,15 +129,14 @@
     </div>
   </div>
 </template>
-<script type="text/javascript" src='https://webapi.amap.com/maps?v=1.4.11&key=7ab53b28352e55dc5754699add0ad862&plugin=AMap.PlaceSearch'></script>
 <script>
 import axios from "axios";
-import { location } from "../config/map";
 export default {
   data() {
     return {
-      currentIndex: [],
+      currentIndex: null,
       picture: [],
+      pictureRow: [],
       data: {},
       input: "",
       value: 4.7,
@@ -136,31 +160,21 @@ export default {
       this.$router.push("/main");
     },
     cancle() {
-      this.$router.push("/orderDetail");
+      this.$router.push("/select");
     },
     toRevision() {
       this.$router.push("/revision");
     },
     async modifiedI() {
-      var checkPhotoVoList = [];
-      var orderId = JSON.parse(localStorage.getItem("orderId"));
-      for (var i = 0; i < this.currentIndex.length; i++) {
-        checkPhotoVoList.push({
-          photoId: this.picture[this.currentIndex[i]].photoId,
-          orderId: orderId,
-        });
-      }
-      if (checkPhotoVoList.length > 0) {
-        const res = await axios.post(
-          "/selectPhoto/changeCheckPhotos",
-          checkPhotoVoList
-        );
-        //console.log(res)
-        if (res.data.msg === "check更新成功") {
-          this.$message.success("提交成功");
-        }
-      } else {
-        this.$message.error("请至少选择一张图片");
+      var orderEntity  = this.params
+      orderEntity.dressId = this.pictureRow[this.currentIndex].dressId
+      const res = await axios.post('/customOrder/sendOrder',orderEntity)
+      console.log(res)
+      if(res.data.data==="订单插入成功"){
+          this.$message.success('订单发布成功')
+          this.currentIndex = null;
+      }else{
+          this.$message.error('订单发布失败')
       }
     },
     open() {
@@ -169,10 +183,20 @@ export default {
         offset: 300,
       });
     },
+    async getType1() {
+      var pageNum = 1;
+      var pageSize = 50;
+      var type = 2;
+      const res = await axios({
+        url: "/purchaseAndDelivery/queryByType",
+        method: "get",
+        params: { pageNum, pageSize, type },
+      });
+      this.pictureRow = res.data.data.list;
+      console.log(res);
+    },
     makeChange(indexJ) {
-      console.log(indexJ);
-      console.log(indexJ in this.currentIndex);
-      if (this.currentIndex.indexOf(indexJ) !== -1) {
+      
         // console.log("indexJ in this.currentIndex");
         // console.log(this.currentIndex);
         // this.currentIndex.forEach((item, index) => {
@@ -182,14 +206,11 @@ export default {
         //     console.log(this.currentIndex);
         //   }
         // });
-        this.currentIndex = this.currentIndex.filter((item) => {
-          return item !== indexJ;
-        });
+        // this.currentIndex = this.currentIndex.filter((item) => {
+        //   return item !== indexJ;
+        // });
+        this.currentIndex = indexJ;
         console.log(this.currentIndex);
-      } else {
-        this.currentIndex.push(indexJ);
-        console.log(this.currentIndex);
-      }
 
       //    console.log(this.currentIndex);
     },
@@ -207,6 +228,9 @@ export default {
     toAbout() {
       this.$router.push("/about");
     },
+    getParams(){
+        this.params = this.$route.query
+    },
     async getAllChoose() {
       const orderId = JSON.parse(localStorage.getItem("orderId"));
       const res = await axios({
@@ -218,23 +242,67 @@ export default {
       console.log(res);
     },
   },
-
   async created() {
     this.getAllChoose();
     this.getUserinfo();
+    
+    this.getType1();
+    this.getParams();
     this.open();
   },
+  watch:{
+      '$route':'getParams'
+  }
 };
 </script>
 <style scoped>
+.infoT {
+  height: 40px;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #9b9b9b;
+  line-height: 20px;
+  padding-top: 10px;
+}
+.contain {
+  width: 295px;
+  height: 270px;
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 12px;
+  border: 1px solid #f2f2f2;
+  border-left: none;
+  background: #fff;
+  vertical-align: top;
+  padding-left: 29px;
+}
+.picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 236px;
+  height: 218px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 12px;
+  margin-top: 15px;
+  border: 1px solid #f2f2f2;
+  background: #fff;
+}
 a {
   text-decoration: none;
   color: black;
 }
 .actived {
-  filter:grey;
-   -moz-opacity:0.1;
-   opacity:0.1;
+  filter: grey;
+  -moz-opacity: 0.1;
+  opacity: 0.1;
 }
 .dada {
   margin: 0 auto;
@@ -265,7 +333,7 @@ a {
   align-items: center;
 }
 .main {
-  padding-top:20px;
+  padding-top: 20px;
   background-color: #fff;
   min-height: calc(100vh - 200px);
   display: flex;
@@ -423,7 +491,6 @@ a {
   color: #fff;
   height: 200px;
   background: #282c31;
-  
 }
 .footer .Lmain .link a {
   font-size: 14px;
@@ -447,7 +514,6 @@ a {
   height: 26px;
   float: left;
   text-align: center;
-
 }
 /* .logo {
   clear: both;
@@ -466,7 +532,7 @@ a {
   font-size: 16px;
   line-height: 20px;
   color: #666c74;
-  margin-left:50px;
+  margin-left: 50px;
 }
 .aside {
   width: 21%;

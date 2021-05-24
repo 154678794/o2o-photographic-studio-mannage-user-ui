@@ -24,7 +24,7 @@
                 <template slot="title">{{data.username}}</template>
                 <el-menu-item index="2-1" @click="toMessage">我的信息</el-menu-item>
                 <el-menu-item @click="toOrderDetail" index="2-2"
-                  ><el-badge  :value="200" :max="99" class="item">
+                  ><el-badge  :value="psOrderCreate" :max="99" class="item">
                     我的订单
                   </el-badge></el-menu-item
                 >
@@ -212,6 +212,8 @@ import axios from "axios";
 export default {
   data() {
     return {
+      websocket:'',
+      psOrderCreate:null,
       photoList: [],
       value: 4.7,
       busy: false,
@@ -397,25 +399,32 @@ export default {
       // const res = await axios.get("/packOrder/searchOrder");
       //console.log(res);
     },
-    websocket() {
+    init(){
       var websocket = null; //判断当前浏览器是否支持WebSocket
       if ("WebSocket" in window) {
-        websocket = new WebSocket(
-          "ws://182.61.52.221:8000/sysin//oneWebsocket/1"
+        this.websocket = new WebSocket(
+          "ws://182.61.52.221:8000/sysin//oneWebsocket/" + this.data.userId
         );
       } else {
-        this.$message.error("当前浏览器 Not support websocket");
+        console.log("当前浏览器 Not support websocket");
       } //连接发生错误的回调方法
-
-      websocket.onerror = function () {
+    },
+    error() {
         // setMessageInnerHTML("WebSocket连接发生错误");
-        this.$message.error("WebSocket连接发生错误");
-      }; //连接成功建立的回调方法
+        console.log("WebSocket连接发生错误");
+      }, //连接成功建立的回调方法
 
-      websocket.onopen = function () {
+    open() {
         // setMessageInnerHTML("WebSocket连接成功");
-      }; //接收到消息的回调方法
+        console.log("WebSocket连接成功")
+      }, //接收到消息的回调方法
+    close() {
+        // setMessageInnerHTML("WebSocket连接关闭");
+        console.log("WebSocket连接关闭");
+      }, //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
 
+
+    websocket() {
       websocket.onmessage = function (event) {
         var messages = [];
         messages = event.data.split("_");
@@ -433,16 +442,11 @@ export default {
           default:
             break;
         }
-        document.getElementById("updatePrice").innerHTML = localStorage.getItem(
+        this.psOrderCreate = localStorage.getItem(
           "psOrderCreate"
         );
-        updatePrice.className = "layui-badge"; //setMessageInnerHTML(event.data);
+        //updatePrice.className = "layui-badge"; setMessageInnerHTML(event.data);
       }; //连接关闭的回调方法
-
-      websocket.onclose = function () {
-        // setMessageInnerHTML("WebSocket连接关闭");
-        console.log("WebSocket连接关闭");
-      }; //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
 
       window.onbeforeunload = function () {
         closeWebSocket();
@@ -457,14 +461,15 @@ export default {
       } //发送消息
 
       function send() {
-        var message = document.getElementById("text").value;
-        websocket.send(message);
+        //var message = document.getElementById("text").value;
+        websocket.send("message");
       }
     },
   },
-  created: function () {
+  async created() {
+    
+    await this.getUserinfo();
     this.websocket();
-    this.getUserinfo();
     this.getPhoto();
     this.getMeal();
     this.queryOrder();
