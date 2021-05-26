@@ -402,7 +402,7 @@ export default {
     init(){
       var websocket = null; //判断当前浏览器是否支持WebSocket
       if ("WebSocket" in window) {
-        this.websocket = new WebSocket(
+        var websocket = new WebSocket(
           "ws://182.61.52.221:8000/sysin//oneWebsocket/" + this.data.userId
         );
       } else {

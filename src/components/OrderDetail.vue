@@ -168,18 +168,23 @@ export default {
         type: "warning",
       })
         .then(async () => {
-         if (Number(this.data.money) >= Number(price)) {
+         if (Number(this.data.money) >= Number(this.book[price].price)) {
+           console.log(Number(this.data.money))
+           console.log(Number(this.book[price].price))
+           
             const money = this.data.money;
             const res = await axios.post(
               "/customOrder/updateHasPay",
               orderEntity
             );
-            this.data.money = money - price;
+            //this.data.money = money - price;
             this.$message({
               type: "success",
               message: "支付成功!",
             });
             this.getAllBook();
+            this.$message.success("支付成功")
+            this.getUserinfo();
           } else {
             this.$message.error("余额不足");
           }
@@ -224,8 +229,8 @@ export default {
     },
     async getAllBook() {
       const res = await axios.get("/packOrder/searchOrder");
-      console.log(res);
       this.book = res.data.data;
+      console.log(this.book)
       this.book.forEach(async (item) => {
         const packId = JSON.parse(item.packId);
         const des = await axios({
