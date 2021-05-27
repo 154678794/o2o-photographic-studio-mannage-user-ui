@@ -218,7 +218,7 @@ export default {
       value: 4.7,
       busy: false,
       quertList: [],
-      pageNum: 1,
+      pageNum: 0,
       pageSize: 5,
       data: {},
       height: "500",
@@ -305,6 +305,7 @@ export default {
     async getGoodsList(flag) {
       var pageNum = this.pageNum;
       var pageSize = this.pageSize;
+      console.log(pageNum,pageSize)
       const res = await axios({
         method: "get",
         url: "/shootingPackage/queryAllPacket",
@@ -324,22 +325,7 @@ export default {
         // 当第一次加载数据完之后，把这个滚动到底部的函数触发打开
         this.busy = false;
       }
-      // axios.get("/shootingPackage/queryAllPacket", ).then((res) => {
-      //   if (flag) {
-      //     // 多次加载数据
-      //     this.quertList = this.quertList.concat(res.data.data.list);
-      //     if (res.data.data.list.length == 0) {
-      //       this.busy = true;
-      //     } else {
-      //       this.busy = false;
-      //     }
-      //   } else {
-      //     // 第一次加载数据
-      //     this.quertList = res.data.data.list;
-      //     // 当第一次加载数据完之后，把这个滚动到底部的函数触发打开
-      //     this.busy = false;
-      //   }
-      // });
+      
     },
     loadMore: function () {
       this.busy = true;
