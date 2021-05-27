@@ -125,7 +125,7 @@
         @click="toWelcome(index)"
         class="contain"
         v-for="(item, index) in quertList"
-        :key="item.packId"
+        :key="index"
       >
         <div class="picture">
           <img
@@ -171,8 +171,8 @@
       <p style="margin-left:20px;font-size:20px;margin-top:15px">商家作品</p>
       <div
         class="containd"
-        v-for="(item, index) in even(photoList)"
-        :key="index"
+        v-for="(item) in even(photoList)"
+        :key="item.photoId"
       >
         <img style="max-width:100%;max-height:100%;width:100%" :src="item.photoUrl" alt="" />
       </div>
@@ -305,7 +305,6 @@ export default {
     async getGoodsList(flag) {
       var pageNum = this.pageNum;
       var pageSize = this.pageSize;
-      console.log(pageNum,pageSize)
       const res = await axios({
         method: "get",
         url: "/shootingPackage/queryAllPacket",
@@ -381,84 +380,12 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    async queryOrder() {
-      // const res = await axios.get("/packOrder/searchOrder");
-      //console.log(res);
-    },
-    init(){
-      var websocket = null; //判断当前浏览器是否支持WebSocket
-      if ("WebSocket" in window) {
-        var websocket = new WebSocket(
-          "ws://182.61.52.221:8000/sysin//oneWebsocket/" + this.data.userId
-        );
-      } else {
-        console.log("当前浏览器 Not support websocket");
-      } //连接发生错误的回调方法
-    },
-    error() {
-        // setMessageInnerHTML("WebSocket连接发生错误");
-        console.log("WebSocket连接发生错误");
-      }, //连接成功建立的回调方法
-
-    open() {
-        // setMessageInnerHTML("WebSocket连接成功");
-        console.log("WebSocket连接成功")
-      }, //接收到消息的回调方法
-    close() {
-        // setMessageInnerHTML("WebSocket连接关闭");
-        console.log("WebSocket连接关闭");
-      }, //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-
-
-    websocket() {
-      websocket.onmessage = function (event) {
-        var messages = [];
-        messages = event.data.split("_");
-        switch (messages[2]) {
-          case "1": //修图订单建立 // localStorage.getItem("psOrerCreate");//获取名称为“key”的值
-            if (localStorage.getItem("psOrderCreate") == null) {
-              localStorage.setItem("psOrderCreate", 1); //以“key”为名称存储一个值“value”
-            } else {
-              localStorage.setItem(
-                "psOrderCreate",
-                parseInt(localStorage.getItem("psOrderCreate")) + 1
-              );
-            }
-            break;
-          default:
-            break;
-        }
-        this.psOrderCreate = localStorage.getItem(
-          "psOrderCreate"
-        );
-        //updatePrice.className = "layui-badge"; setMessageInnerHTML(event.data);
-      }; //连接关闭的回调方法
-
-      window.onbeforeunload = function () {
-        closeWebSocket();
-      }; //将消息显示在网页上
-
-      function setMessageInnerHTML(innerHTML) {
-        document.getElementById("message").innerHTML += innerHTML + "<br/>";
-      } //关闭WebSocket连接
-
-      function closeWebSocket() {
-        websocket.close();
-      } //发送消息
-
-      function send() {
-        //var message = document.getElementById("text").value;
-        websocket.send("message");
-      }
-    },
-  },
-  async created() {
     
-    await this.getUserinfo();
-    this.websocket();
+  },
+  created() {
+    this.getUserinfo();
     this.getPhoto();
     this.getMeal();
-    this.queryOrder();
   },
   // computed:{
   //   devList:function(){
